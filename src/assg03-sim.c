@@ -23,7 +23,7 @@ int main(int argc, char **argv)
   // Full system tests, to get the system tests to work and this simulation
   // to finally run, uncomment the call to the start() main function that you
   // should have implemented in task 9.
-  //start(0x0); // START PROGRAM
+  start(0x0); // START PROGRAM
   fprintf(stdout, "Occupied memory after program execution:\n");
   fprintf_mem_nonzero(stdout, mem, UINT16_MAX);
   fprintf(stdout, "Registers after program execution:\n");
