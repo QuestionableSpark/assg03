@@ -173,6 +173,33 @@ void update_flags(enum registr r)
  */
 // put your implememtation of add() here below it documentation
 
+/**
+ * Task 5: Definition of add() function. This function adds two values and stores
+ * the result in the destination register. There are two modes set by the FIMM flag
+ * at bit 5 of the instruction.
+ * 
+ * Register mode (FIMM = 0):
+ * Uses two source registers SR1 and SR2, extracts both and looks up their current
+ * values in the reg[] array. Adds them and stores result into destination register (DR)
+ * 
+ * Immediate mode (FIMM = 1):
+ * Uses one source register SR1 and a 5-bit immediate value embedded in bits 4-0 of the instruction.
+ * The immediate value is sign-extended to a full 16-bit twos-complement value using SEXTIMM 
+ * before adding the source register value. Stored in DR.
+ */
+void add(uint16_t i)
+{
+  if (FIMM(i))
+  {
+    reg[DR(i)] = reg[SR1(i)] + SEXTIMM(i);
+  }
+  else
+  {
+    reg[DR(i)] = reg[SR1(i)] + reg[SR2(i)];
+  }
+  update_flags(DR(i));
+}
+
 /** @brief logical AND operation
  *
  * Compute the logical AND of 2 16 bit values and store the result in
@@ -194,6 +221,21 @@ void update_flags(enum registr r)
  */
 // put your implememtation of andlc() here below it documentation
 
+// Task 5: Defining logical AND operation (similar to add())
+void andlc(uint16_t i)
+{
+  if (FIMM(i))
+  {
+    reg[DR(i)] = reg[SR1(i)] & SEXTIMM(i);
+  }
+  else
+  {
+    reg[DR(i)] = reg[SR1(i)] & reg[SR2(i)];
+  }
+  update_flags(DR(i));
+}
+
+
 /** @brief logical NOT operation
  *
  * Perform a logical NOT on the indicated source register and save the
@@ -207,6 +249,13 @@ void update_flags(enum registr r)
  *   instruction.
  */
 // put your implememtation of notlc() here below it documentation
+
+// Task 5: Defining the logical NOT operation
+void notlc(uint16_t i)
+{
+  reg[DR(i)] = ~reg[SR1(i)];
+  update_flags(DR(i));
+}
 
 /** @brief load RPC + offset
  *
