@@ -98,6 +98,19 @@ void mem_write(uint16_t address, uint16_t value)
  *    value.
  */
 // put your implememtation of sign_extend() here below it documentation
+// Task 2: Definition of sign_extend() 
+uint16_t sign_extend(uint16_t bits, int size)
+{
+  if ((bits >> (size - 1)) & 1)
+  {
+    bits |= (0xFFFF << size);
+  }
+  else
+  {
+    bits &= (0xFFFF >> (16 - size));
+  }
+  return bits;
+}
 
 /** @brief update condition register flags
  *
