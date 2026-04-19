@@ -654,6 +654,27 @@ void trap(uint16_t i)
 // you need to declare the operator execution lookup table here.  This will be an
 // array of function pointers to your opcode microcode execution functions.
 
+// Task 10: Declaring the opcode execution function pointer lookup table, called
+// LC-3. The order must exactly match the opcode binary values 0x0 through 0xF
+op_ex_f op_ex[NUMOPS] = {
+  br,     // 0x0 - conditional branch
+  add,    // 0x1 - addition
+  ld,     // 0x2 - load PC + offset
+  st,     // 0x3 - store PC + offset
+  jsr,    // 0x4 - jump to subroutine
+  andlc,  // 0x5 - bitwise logical AND
+  ldr,    // 0x6 - load base + offset
+  str,    // 0x7 - store base + offset
+  rti,    // 0x8 - return from interrupt
+  notlc,  // 0x9 - bitwise logical NOT
+  ldi,    // 0xA - load indirect
+  sti,    // 0xB - store indirect
+  jmp,    // 0xC - unconditional jump
+  res,    // 0xD - reserved
+  lea,    // 0xE - load effective address
+  trap    // 0xF - system trap/call
+};
+
 
 /** @brief start/run LC-3 simulator
  *
@@ -671,6 +692,17 @@ void trap(uint16_t i)
  *   in this routine.
  */
 // put your implememtation of start() here below its documentation
+
+// Task 10: Implementing a fetch, increment, decode, and execute LC-3 simulator
+void start(uint16_t offset)
+{
+  reg[RPC] = PC_START + offset;
+  while (running)
+  {
+    uint16_t i = mem_read(reg[RPC]++);
+    op_ex[OPC(i)](i);
+  }
+}
 
 /** @brief load an LC-3 machine instruction image
  *
