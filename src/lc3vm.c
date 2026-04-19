@@ -367,6 +367,12 @@ void lea(uint16_t i)
  */
 // put your implememtation of st() here below it documentation
 
+// Task 7: Defining storing via PC + Offset
+void st(uint16_t i)
+{
+  mem_write(reg[RPC] + PCOFF9(i), reg[DR(i)]);
+}
+
 /** @brief store indirect
  *
  * Similar to the basic store, but with an extra level of indirection.
@@ -383,6 +389,12 @@ void lea(uint16_t i)
  */
 // put your implememtation of sti() here below it documentation
 
+// Task 7: Defining storing via indirect
+void sti(uint16_t i)
+{
+  mem_write(mem_read(reg[RPC] + PCOFF9(i)), reg[DR(i)]);
+}
+
 /** @brief store offset relative to base address
  *
  * This instruction has a register with a base address, and the low 6
@@ -397,6 +409,12 @@ void lea(uint16_t i)
  *   second source register or the immediate value encoded in the
  */
 // put your implememtation of str() here below it documentation
+
+// Task 7: Defining storing via offset relative to base address
+void str(uint16_t i)
+{
+  mem_write(reg[SR1(i)] + OFF6(i), reg[DR(i)]);
+}
 
 /** @brief jump unconditionally
  *

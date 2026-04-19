@@ -125,6 +125,12 @@ void ldi(uint16_t i);
 void ldr(uint16_t i);
 void lea(uint16_t i);
 
+// Task 7: Declaring various storing functions (stores a value from a source
+// register and stores it in memory)
+void st(uint16_t i);
+void sti(uint16_t i);
+void str(uint16_t i);
+
 void rti(uint16_t i);
 void res(uint16_t i);
 void tgetc();
