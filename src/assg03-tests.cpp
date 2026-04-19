@@ -23,7 +23,7 @@
 #define task6
 #define task7
 #define task8
-#undef task9
+#define task9
 #undef task10
 
 /**
