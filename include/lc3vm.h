@@ -118,6 +118,13 @@ void add(uint16_t i);
 void andlc(uint16_t i);
 void notlc(uint16_t i);
 
+// Task 6: Declaring various loading functions (load RPC + offset, 
+// load indirect, load base + relative offset, and load effective address)
+void ld(uint16_t i);
+void ldi(uint16_t i);
+void ldr(uint16_t i);
+void lea(uint16_t i);
+
 void rti(uint16_t i);
 void res(uint16_t i);
 void tgetc();
