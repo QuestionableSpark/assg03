@@ -110,6 +110,9 @@ uint16_t sign_extend(uint16_t bits, int size);
 // them to a full 16-bit twos-complement value. Used as an offset
 // from the PC in the jsr instruction.
 
+// Task 4: Declaring the update_flags() function
+void update_flags(enum registr r);
+
 void rti(uint16_t i);
 void res(uint16_t i);
 void tgetc();

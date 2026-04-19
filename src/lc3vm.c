@@ -127,6 +127,25 @@ uint16_t sign_extend(uint16_t bits, int size)
  */
 // put your implememtation of update_flags() here below it documentation
 
+// Task 4: Defining the update_flags function. If the register value is 0
+// it sets zero flag FZ. If the most significant bit (bit 15) is 1, set to 
+// negative number FN. Otherwise its set to FP (positive).
+void update_flags(enum registr r)
+{
+  if (reg[r] == 0)
+  {
+    reg[RCND] = FZ;
+  }
+  else if (reg[r] >> 15)
+  {
+    reg[RCND] = FN;
+  }
+  else
+  {
+    reg[RCND] = FP;
+  }
+}
+
 /** @brief add operation
  *
  * Add two values together and store result in destination register.
