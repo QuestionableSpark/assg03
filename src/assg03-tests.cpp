@@ -1,9 +1,9 @@
 /** @file assg03-tests.cpp
  * @brief Unit tests for LC-3 microarchitecture/VM simulator.
  *
- * @author Student Name
- * @note   cwid: 123456
- * @date   Spring 2024
+ * @author Nicholas Knebel
+ * @note   cwid: 50417706
+ * @date   Spring 2026
  * @note   ide:  VS Code Editor / IDE ; g++ 8.2.0 / GNU Make 4.2.1
  *
  * Unit tests for assignment 03, implementaiton of LC-3
@@ -17,7 +17,7 @@
 
 #define task1
 #define task2
-#undef task3
+#define task3
 #undef task4
 #undef task5
 #undef task6

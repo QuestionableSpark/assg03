@@ -73,6 +73,43 @@ void mem_write(uint16_t address, uint16_t value);
 // Task 2: Implement Sign Extension Function
 uint16_t sign_extend(uint16_t bits, int size);
 
+// Task 3: Declare Instruction/Operand Extraction Support Preprocessor Macros
+#define OPC(i)      ((i) >> 12)
+// Shifts the instruction right 12 bits to isolate the 4-bit opcode
+// in the least significant bits, discarding all operand bits.
+
+#define DR(i)       (((i) >> 9) & 0x7)
+// Shifts the instruction right 9 bits then masks with 0x7 (0b111)
+// to isolate the 3-bit destination register number in bits 11-9.
+
+#define SR1(i)      (((i) >> 6) & 0x7)
+// Shifts the instruction right 6 bits then masks with 0x7 (0b111)
+// to isolate the 3-bit source register 1 number in bits 8-6.
+
+#define SR2(i)      ((i) & 0x7)
+// Masks the instruction with 0x7 (0b111) to isolate the 3-bit
+// source register 2 number in the lowest bits 2-0.
+
+#define SEXTIMM(i)  sign_extend((i) & 0x1F, 5)
+// Masks the lowest 5 bits of the instruction and sign extends
+// them to a full 16-bit twos-complement value. Used for immediate
+// mode operands in add and andlc instructions.
+
+#define OFF6(i)     sign_extend((i) & 0x3F, 6)
+// Masks the lowest 6 bits of the instruction and sign extends
+// them to a full 16-bit twos-complement value. Used as an offset
+// from a base register in ldr and str instructions.
+
+#define PCOFF9(i)   sign_extend((i) & 0x1FF, 9)
+// Masks the lowest 9 bits of the instruction and sign extends
+// them to a full 16-bits twos-complement value. Used as an offset
+// from the PC in ld, st, ldi, sti, br and lea instructions.
+
+#define PCOFF11(i)  sign_extend((i) & 0x7FF, 11)
+// Masks the lowest 11 bits of the instruction and sign extends
+// them to a full 16-bit twos-complement value. Used as an offset
+// from the PC in the jsr instruction.
+
 void rti(uint16_t i);
 void res(uint16_t i);
 void tgetc();
